@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">accelarometerTest</string>
+
+    <string name="accText">Acceleration: %.2f</string>
+    <string name="valuesText">x: %.2f | y: %.2f | z: %.2f</string>
+    <string name="valuesDiff"><b>Difference: </b> x [%.2f] | y [%.2f] | z [%.2f]</string>
+</resources>
