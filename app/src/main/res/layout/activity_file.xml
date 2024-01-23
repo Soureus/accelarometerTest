@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/TestLayout">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dataTable">
+
+        <TableRow
+            android:id="@+id/tableHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/xTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="x acceleration"
+                    android:paddingEnd="20dp"
+                    android:paddingStart="5dp"/>
+                <TextView
+                    android:id="@+id/yTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="y acceleration"
+                    android:paddingEnd="20dp"/>
+                <TextView
+                    android:id="@+id/zTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="z acceleration"
+                    android:paddingEnd="20dp"/>
+                <TextView
+                    android:id="@+id/AccTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acceleration"/>
+        </TableRow>
+
+
+    </TableLayout>
+</LinearLayout>

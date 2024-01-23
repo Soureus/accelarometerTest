@@ -1,14 +1,17 @@
 package com.example.accelarometertest
 
+import android.content.Intent
 import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract.Colors
+import android.widget.Button
 import android.widget.TextView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Description
@@ -19,6 +22,14 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.slider.LabelFormatter
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileOutputStream
+import java.io.FileReader
+import java.io.FileWriter
+import java.io.IOException
+import java.lang.System.out
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -36,12 +47,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var accView : TextView
     private lateinit var  valView : TextView
     private lateinit var diffView : TextView
+    private lateinit var textOutput : TextView
+    private lateinit var outputButton : Button
 
     //CHART
     private lateinit var barChart : BarChart
     private lateinit var barData : BarData
     private lateinit var barDataSet : BarDataSet
     private var barEntries = ArrayList<BarEntry>()
+
+    private lateinit var bw : BufferedWriter
+    private lateinit var br : BufferedReader
+    private lateinit var file : File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +67,25 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         accView = findViewById(R.id.accView)
         valView = findViewById(R.id.valView)
         diffView = findViewById(R.id.valDiffView)
+        outputButton = findViewById(R.id.fileOpenBtn)
+
+        file = File(filesDir, "Test.txt");
+        try {
+            file.createNewFile();
+        }catch (e : IOException){
+            e.printStackTrace()
+        }
+
+        bw = BufferedWriter(FileWriter(file))
+
+        outputButton.setOnClickListener {
+            val intent = Intent(this, FileActivity::class.java)
+            startActivity(intent)
+            //textOutput = findViewById(R.id.fileOutput)
+
+            //val text = br.readLine()
+            //textOutput.text = text
+        }
 
         beep = MediaPlayer.create(this, R.raw.beep)
         setUpChartStuff()
@@ -94,6 +130,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
                 if(acc > 40){
                     beep.start()
+
+                    val output = "$xDiff|$yDiff|$zDiff|$acc"
+
+                    FileOutputStream(file, true).bufferedWriter().use { out ->
+                        out.appendLine(output)
+                    }
+
+
                 }
 
                 barEntries[0] = BarEntry(0f, acc, "Acceleration")
@@ -170,4 +214,5 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         barEntries.add(BarEntry(2f, 45f))
         barEntries.add(BarEntry(3f,45f))
     }
+
 }
