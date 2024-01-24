@@ -30,6 +30,8 @@ import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
 import java.lang.System.out
+import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
@@ -100,17 +102,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
              sensorManager.registerListener(
                  this,
                  it,
-                 2,
-                 2
+                 1,
+                 1
              )
         }
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
         if(event?.sensor?.type == Sensor.TYPE_ACCELEROMETER){
-            val x = event.values[0].toFloat()
-            val y = event.values[1].toFloat()
-            val z = event.values[2].toFloat()
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
 
             val lastX = lastVals[0]
             val lastY = lastVals[1]
@@ -131,7 +133,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 if(acc > 40){
                     beep.start()
 
-                    val output = "$xDiff|$yDiff|$zDiff|$acc"
+                    val xDiffDec = BigDecimal(xDiff.toDouble()).setScale(3, RoundingMode.HALF_EVEN)
+                    val yDiffDec = BigDecimal(yDiff.toDouble()).setScale(3, RoundingMode.HALF_EVEN)
+                    val zDiffDec = BigDecimal(zDiff.toDouble()).setScale(3, RoundingMode.HALF_EVEN)
+                    val accDec = BigDecimal(acc.toDouble()).setScale(3, RoundingMode.HALF_EVEN)
+                    val output = "$xDiffDec|$yDiffDec|$zDiffDec|$accDec"
 
                     FileOutputStream(file, true).bufferedWriter().use { out ->
                         out.appendLine(output)

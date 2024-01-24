@@ -21,25 +21,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="x acceleration"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="5dp"/>
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:background="@drawable/border"/>
                 <TextView
                     android:id="@+id/yTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="y acceleration"
-                    android:paddingEnd="20dp"/>
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:background="@drawable/border"/>
                 <TextView
                     android:id="@+id/zTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="z acceleration"
-                    android:paddingEnd="20dp"/>
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:background="@drawable/border"/>
                 <TextView
                     android:id="@+id/AccTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Acceleration"/>
+                    android:text="Acceleration"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:background="@drawable/border"/>
         </TableRow>
 
 
